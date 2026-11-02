@@ -1,85 +1,34 @@
-# traffic-accident-severity-prediction-mlops
-
 # Traffic Accident Severity Analytics and Prediction
 
-This project analyzes road traffic accidents and predicts accident severity using machine learning.
+A student-friendly MLOps/Data Engineering project based on the assignment brief.
 
-## Project Overview
+## Part 1
+- Python/Pandas ingestion
+- Raw, staging, cleaned and analytical layers
+- Data quality checks and rejected-record log
+- PostgreSQL loading
+- Streamlit dashboard
+- Airflow DAG
 
-The project uses UK road accident data and historical weather data to analyze accident patterns and predict collision severity.
+## Quick start
+1. Create a Python virtual environment.
+2. Install `requirements.txt`.
+3. Put your accident CSV in `data/raw/accidents.csv`.
+4. Run:
+   `python src/ingestion.py`
+   `python src/cleaning.py`
+   `python src/build_mart.py`
+5. Run dashboard:
+   `streamlit run dashboard/app.py`
 
-## Technologies Used
+The pipeline includes a demo-data fallback if `data/raw/accidents.csv` is not present, so you can test the project immediately. Replace the demo data with your approved public dataset before submission.
 
-- Python
-- Pandas
-- Scikit-learn
-- Random Forest
-- XGBoost
-- LightGBM
-- PostgreSQL
-- Streamlit
-- FastAPI
-- Apache Airflow
-- MLflow
+## PostgreSQL
+Set these environment variables before loading:
+DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASSWORD
 
-## Features
+Then run:
+`python src/load_postgres.py`
 
-- Accident data analysis and visualization
-- Accident severity prediction
-- Weather data integration
-- Interactive Streamlit dashboard
-- Machine learning model comparison
-- MLflow experiment tracking
-- Automated ML pipeline using Airflow
-- FastAPI prediction service
-- API performance monitoring
-
-## Machine Learning Models
-
-- Random Forest
-- XGBoost
-- LightGBM
-
-Random Forest was selected based on its macro F1-score.
-
-## Project Structure
-
-```text
-traffic-accident-severity-prediction/
-├── api/
-├── dashboard/
-├── ml/
-├── dags/
-├── models/
-├── monitoring/
-├── requirements.txt
-└── README.md
-```
-
-## How to Run
-
-Install dependencies:
-
-```bash
-pip install -r requirements.txt
-```
-
-Run the Streamlit dashboard:
-
-```bash
-python -m streamlit run dashboard/app.py
-```
-
-Run the FastAPI application:
-
-```bash
-uvicorn api.main:app --host 0.0.0.0 --port 8001
-```
-
-## Author
-
-**Varshini Papa Reddy**
-
-B.Tech – Artificial Intelligence and Machine Learning
-
-CMR Institute of Technology, Bengaluru
+## Airflow
+Copy/use `dags/accident_pipeline.py` in your Airflow DAGs folder.
